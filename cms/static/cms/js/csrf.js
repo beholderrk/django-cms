@@ -30,3 +30,13 @@ xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
 });
 };
 })(jQuery);
+
+jQuery(document).ready(function ($) {
+    // initialize security patch
+    try {
+        CMS.API.Security.csrf();
+    }
+    catch (e) {
+        console.log('CMS not defined');
+    }
+});

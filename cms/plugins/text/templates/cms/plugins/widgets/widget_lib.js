@@ -16,7 +16,7 @@ function add_plugin(type, parent_id, language){
 		if ('error' != data) {
 			// Successfully created, data is pk of object, but object
 			// is 'blank'. We now want to show the edit popup.
-			
+
 			// We only want to insert the text if the user actually
 			// *saved* the object.  We don't have modal dialogs, so we
 			// register a callback against the id number.  This callback
@@ -28,7 +28,7 @@ function add_plugin(type, parent_id, language){
 				texteditor.insertText(plugin_admin_html(plugin_id, icon_src, icon_alt));
 				editPluginPopupCallbacks[data] = null; // Unbind callback
 			};
-			
+
 		}
 	}, "html");
 }

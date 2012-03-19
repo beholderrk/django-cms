@@ -316,7 +316,7 @@ class CMSPlugin(MPTTModel):
             return self.placeholder.has_change_permission(request)
         elif self.parent:
             return self.parent.has_change_permission(request)
-        return False
+        return True
         
     def is_first_in_placeholder(self):
         return self.position == 0

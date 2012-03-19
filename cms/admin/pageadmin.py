@@ -124,7 +124,7 @@ def contribute_fieldsets(cls):
 
 
 def contribute_list_filter(cls):
-    list_filter = ['published', 'in_navigation', 'template', 'changed_by']
+    list_filter = ['published', 'in_navigation', 'template', 'changed_by', 'publication_date', 'publication_end_date']
     if settings.CMS_MODERATOR:
         list_filter.append('moderator_state')
     if settings.CMS_SOFTROOT:
@@ -143,6 +143,7 @@ class PageAdmin(ModelAdmin):
     mandatory_placeholders = ('title', 'slug', 'parent', 'site', 'meta_description', 'meta_keywords', 'page_title', 'menu_title')
     add_general_fields = ['title', 'slug', 'language', 'template']
     change_list_template = "admin/cms/page/change_list.html"
+    date_hierarchy = 'creation_date'
 
     # take care with changing fieldsets, get_fieldsets() method removes some
     # fields depending on permissions, but its very static!!
@@ -1267,8 +1268,10 @@ class PageAdmin(ModelAdmin):
                 'name': unicode(saved_object),
                 "type": saved_object.get_plugin_name(),
                 'plugin_id': plugin_id,
-                'icon': force_escape(escapejs(saved_object.get_instance_icon_src())),
-                'alt': force_escape(escapejs(saved_object.get_instance_icon_alt())),
+#                'icon': force_escape(escapejs(saved_object.get_instance_icon_src())),
+#                'alt': force_escape(escapejs(saved_object.get_instance_icon_alt())),
+                'icon': saved_object.get_instance_icon_src(),
+                'alt': saved_object.get_instance_icon_alt(),
             }
             return render_to_response('admin/cms/page/plugin_forms_ok.html', context, RequestContext(request))
 

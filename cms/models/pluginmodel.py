@@ -170,7 +170,7 @@ class CMSPlugin(MPTTModel):
             if isinstance(placeholder, Placeholder):
                 placeholder_slot = placeholder.slot
             else:
-                placeholder_slot = placeholder or instance.placeholder.slot
+                placeholder_slot = placeholder or getattr(instance.placeholder, "slot", None)
             placeholder = instance.placeholder
             context = PluginContext(context, instance, placeholder)
             context = plugin.render(context, instance, placeholder_slot)
